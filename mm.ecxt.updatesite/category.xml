@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/mm.ecxt.sdk_0.0.0.jar" id="mm.ecxt.sdk" version="0.0.0">
+      <category name="mm.ecxt"/>
+   </feature>
+   <category-def name="mm.ecxt" label="Metamath Eclipse-Xtext plugin"/>
+</site>
