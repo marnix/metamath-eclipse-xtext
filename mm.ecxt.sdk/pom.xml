@@ -15,5 +15,5 @@
   <artifactId>mm.ecxt.sdk</artifactId>
   <packaging>eclipse-feature</packaging>
 
-  <name>My Hero Language Feature</name>
+  <name>Metamath Eclipse Plugin Feature</name>
 </project>

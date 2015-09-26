@@ -226,21 +226,21 @@
 
 	<!-- marker definitions for mm.ecxt.MMLanguage -->
 	<extension
-	        id="herolanguage.check.fast"
+	        id="mm.ecxt.check.fast"
 	        name="MMLanguage Problem"
 	        point="org.eclipse.core.resources.markers">
 	    <super type="org.eclipse.xtext.ui.check.fast"/>
 	    <persistent value="true"/>
 	</extension>
 	<extension
-	        id="herolanguage.check.normal"
+	        id="mm.ecxt.check.normal"
 	        name="MMLanguage Problem"
 	        point="org.eclipse.core.resources.markers">
 	    <super type="org.eclipse.xtext.ui.check.normal"/>
 	    <persistent value="true"/>
 	</extension>
 	<extension
-	        id="herolanguage.check.expensive"
+	        id="mm.ecxt.check.expensive"
 	        name="MMLanguage Problem"
 	        point="org.eclipse.core.resources.markers">
 	    <super type="org.eclipse.xtext.ui.check.expensive"/>
@@ -316,7 +316,7 @@
             point="org.eclipse.ui.ide.markerResolution">
         <markerResolutionGenerator
             class="mm.ecxt.ui.MMLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
-            markerType="mm.ecxt.ui.herolanguage.check.fast">
+            markerType="mm.ecxt.ui.mm.ecxt.check.fast">
             <attribute
                 name="FIXABLE_KEY"
                 value="true">
@@ -324,7 +324,7 @@
         </markerResolutionGenerator>
         <markerResolutionGenerator
             class="mm.ecxt.ui.MMLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
-            markerType="mm.ecxt.ui.herolanguage.check.normal">
+            markerType="mm.ecxt.ui.mm.ecxt.check.normal">
             <attribute
                 name="FIXABLE_KEY"
                 value="true">
@@ -332,7 +332,7 @@
         </markerResolutionGenerator>
         <markerResolutionGenerator
             class="mm.ecxt.ui.MMLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
-            markerType="mm.ecxt.ui.herolanguage.check.expensive">
+            markerType="mm.ecxt.ui.mm.ecxt.check.expensive">
             <attribute
                 name="FIXABLE_KEY"
                 value="true">

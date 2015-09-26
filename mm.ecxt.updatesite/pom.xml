@@ -15,7 +15,7 @@
   <artifactId>mm.ecxt.updatesite</artifactId>
   <packaging>eclipse-repository</packaging>
 
-  <name>My Hero Language Update Site</name>
+  <name>Metamath Eclipse Plugin Update Site</name>
 
 	<build>
 		<plugins>

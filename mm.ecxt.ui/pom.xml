@@ -15,7 +15,7 @@
 	<artifactId>mm.ecxt.ui</artifactId>
 	<packaging>eclipse-plugin</packaging>
 
-	<name>My Hero Language UI</name>
+	<name>Metamath Eclipse Plugin UI</name>
 
 	<build>
 		<plugins>
