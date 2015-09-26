@@ -16,7 +16,6 @@ Require-Bundle: mm.ecxt;visibility:=reexport,
  org.eclipse.xtext.common.types.ui,
  org.eclipse.xtext.ui.codetemplates.ui,
  org.eclipse.compare,
- org.eclipse.xtext.xbase.ui,
  org.eclipse.xtext.xbase.lib,
  org.eclipse.jdt.debug.ui
 Import-Package: org.apache.log4j,

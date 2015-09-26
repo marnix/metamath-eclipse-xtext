@@ -1,4 +1,4 @@
-grammar mm.ecxt.MMLanguage with org.eclipse.xtext.xbase.Xbase
+grammar mm.ecxt.MMLanguage with org.eclipse.xtext.common.Terminals
 
 generate mmLanguage "urn:marnix:mm.exct/MMLanguage"
 
