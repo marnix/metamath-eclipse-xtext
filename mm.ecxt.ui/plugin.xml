@@ -9,7 +9,7 @@
             class="mm.ecxt.ui.MMLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
             contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
             default="true"
-            extensions="hero"
+            extensions="mm"
             id="mm.ecxt.MMLanguage"
             name="MMLanguage Editor">
         </editor>
@@ -213,13 +213,13 @@
 		point="org.eclipse.emf.ecore.extension_parser">
 		<parser
 			class="mm.ecxt.ui.MMLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
-			type="hero">
+			type="mm">
 		</parser>
 	</extension>
 	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
         <resourceServiceProvider
             class="mm.ecxt.ui.MMLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
-            uriExtension="hero">
+            uriExtension="mm">
         </resourceServiceProvider>
     </extension>
 
@@ -377,19 +377,19 @@
   <extension point="org.eclipse.compare.contentViewers">
     <viewer id="mm.ecxt.MMLanguage.compare.contentViewers"
             class="mm.ecxt.ui.MMLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
-            extensions="hero">
+            extensions="mm">
     </viewer>
   </extension>
   <extension point="org.eclipse.compare.contentMergeViewers">
     <viewer id="mm.ecxt.MMLanguage.compare.contentMergeViewers"
             class="mm.ecxt.ui.MMLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
-            extensions="hero" label="MMLanguage Compare">
+            extensions="mm" label="MMLanguage Compare">
      </viewer>
   </extension>
   <extension point="org.eclipse.ui.editors.documentProviders">
     <provider id="mm.ecxt.MMLanguage.editors.documentProviders"
             class="mm.ecxt.ui.MMLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.model.XtextDocumentProvider"
-            extensions="hero">
+            extensions="mm">
     </provider>
   </extension>
 

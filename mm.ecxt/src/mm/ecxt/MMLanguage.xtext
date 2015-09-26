@@ -2,12 +2,14 @@ grammar mm.ecxt.MMLanguage with org.eclipse.xtext.xbase.Xbase
 
 generate mmLanguage "urn:marnix:mm.exct/MMLanguage"
 
-Heros:
-	heros+=SuperHero*;
+MetamathDatabase:
+	statements+=statement*;
 	
-SuperHero:
-	'hero' name=ID 'can' abilities+=Ability (someCode=XBlockExpression)?;
+statement:
+	constantStatement;
 	
-enum Ability :
-	FLY | SUPERPOWER | FIRE | ICE
-;
+constantStatement:
+    '$c' id=MATHSYMBOL '$.';
+    
+terminal MATHSYMBOL: 
+      ('!'..'#'|'%'..'~')+; 

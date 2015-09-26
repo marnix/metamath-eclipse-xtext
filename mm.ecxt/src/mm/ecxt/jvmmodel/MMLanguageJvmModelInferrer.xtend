@@ -1,22 +1,22 @@
 package mm.ecxt.jvmmodel
 
 import com.google.inject.Inject
-import mm.ecxt.mmLanguage.Heros
 import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
+import mm.ecxt.mmLanguage.MetamathDatabase
 
 /**
  * <p>Infers a JVM model from the source model.</p> 
- * 
+ *
  * <p>The JVM model should contain all elements that would appear in the Java code 
  * which is generated from the source model. Other models link against the JVM model rather than the source model.</p>     
  */
 class MMLanguageJvmModelInferrer extends AbstractModelInferrer {
 
-	/**
-	 * convenience API to build and initialize JVM types and their members.
-	 */
+    /**
+     * convenience API to build and initialize JVM types and their members.
+     */
 	@Inject extension JvmTypesBuilder
 
 	/**
@@ -44,14 +44,19 @@ class MMLanguageJvmModelInferrer extends AbstractModelInferrer {
 	 *            rely on linking using the index if isPreIndexingPhase is
 	 *            <code>true</code>.
 	 */
-	def dispatch void infer(Heros element, IJvmDeclaredTypeAcceptor acceptor, boolean isPreIndexingPhase) {
-		for (hero : element.heros) {
-			acceptor.accept(element.toClass("my.company." + hero.name)) [
-				members += hero.toMethod("hello" + hero.name, inferredType) [
-					body = hero.someCode
-				]
-			]
-		}
-	}
+   	def dispatch void infer(MetamathDatabase element, IJvmDeclaredTypeAcceptor acceptor, boolean isPreIndexingPhase) {
+   		// Here you explain how your model is mapped to Java elements, by writing the actual translation code.
+   		
+   		// An implementation for the initial hello world example could look like this:
+//   		acceptor.accept(element.toClass("my.company.greeting.MyGreetings")) [
+//   			for (greeting : element.greetings) {
+//   				members += greeting.toMethod("hello" + greeting.name, typeRef(String)) [
+//   					body = '''
+//							return "Hello «greeting.name»";
+//   					'''
+//   				]
+//   			}
+//   		]
+   	}
 }
 

@@ -2,7 +2,7 @@ package mm.ecxt.tests
 
 import com.google.inject.Inject
 import mm.ecxt.MMLanguageInjectorProvider
-import mm.ecxt.mmLanguage.Heros
+import mm.ecxt.mmLanguage.MetamathDatabase
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.junit4.util.ParseHelper
@@ -15,13 +15,13 @@ import static org.junit.Assert.*
 @InjectWith(MMLanguageInjectorProvider)
 class SimpleParsingTest {
 	
-	@Inject extension ParseHelper<Heros>
+	@Inject extension ParseHelper<MetamathDatabase>
 	
 	@Test def void testParse() {
-		val heros = '''
-			hero superman can FLY
-			hero iceman can ICE
+		val mmDb = '''
+			$c |- $.
+			$c wff $.
 		'''.parse
-		assertEquals(2, heros.heros.size)
+		assertEquals(2, mmDb.statements.size)
 	}
 }

@@ -25,7 +25,6 @@ Import-Package: org.apache.log4j,
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Export-Package: mm.ecxt,
  mm.ecxt.formatting,
- mm.ecxt.jvmmodel,
  mm.ecxt.scoping,
  mm.ecxt.validation,
  mm.ecxt.mmLanguage,
@@ -34,4 +33,5 @@ Export-Package: mm.ecxt,
  mm.ecxt.parser.antlr,
  mm.ecxt.parser.antlr.internal,
  mm.ecxt.serializer,
- mm.ecxt.services
+ mm.ecxt.services,
+ mm.ecxt.jvmmodel
