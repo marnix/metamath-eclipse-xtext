@@ -9,7 +9,7 @@ statement:
 	constantStatement;
 	
 constantStatement:
-    '$c' id=MATHSYMBOL '$.';
+    '$c' (id=MATHSYMBOL)+ '$.';
     
 terminal MATHSYMBOL: 
       ('!'..'#'|'%'..'~')+; 

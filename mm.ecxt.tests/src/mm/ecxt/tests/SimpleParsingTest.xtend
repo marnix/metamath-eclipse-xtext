@@ -21,7 +21,8 @@ class SimpleParsingTest {
 		val mmDb = '''
 			$c |- $.
 			$c wff $.
+			$c set class $.
 		'''.parse
-		assertEquals(2, mmDb.statements.size)
+		assertEquals(3, mmDb.statements.size)
 	}
 }
