@@ -6,7 +6,6 @@ Bundle-Version: 1.0.0.qualifier
 Bundle-SymbolicName: mm.ecxt; singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext;visibility:=reexport,
- org.eclipse.xtext.xbase;resolution:=optional;visibility:=reexport,
  org.eclipse.xtext.generator;resolution:=optional,
  org.apache.commons.logging;bundle-version="1.0.4";resolution:=optional,
  org.eclipse.emf.codegen.ecore;resolution:=optional,
@@ -34,4 +33,4 @@ Export-Package: mm.ecxt,
  mm.ecxt.parser.antlr.internal,
  mm.ecxt.serializer,
  mm.ecxt.services,
- mm.ecxt.jvmmodel
+ mm.ecxt.generator
