@@ -1,9 +1,11 @@
 Metamath plugin for Eclipse based on Xtext
 ==========================================
 
-[![Build Status](https://buildhive.cloudbees.com/job/marnix/job/metamath-eclipse-xtext/badge/icon)](https://buildhive.cloudbees.com/job/marnix/job/metamath-eclipse-xtext/)
+TravisCI says: [![Build Status](https://travis-ci.org/marnix/metamath-eclipse-xtext.svg?branch=master)](https://travis-ci.org/marnix/metamath-eclipse-xtext)
 
-The Eclipse update site resulting from [the last successful build](https://buildhive.cloudbees.com/job/marnix/job/metamath-eclipse-xtext/lastSuccessfulBuild/) usually at https://buildhive.cloudbees.com/job/marnix/job/metamath-eclipse-xtext/ws/last-successful-updatesite/; however, I haven't yet found out where to store it more permanently.
+CloudBees says: [![Build Status](https://buildhive.cloudbees.com/job/marnix/job/metamath-eclipse-xtext/badge/icon)](https://buildhive.cloudbees.com/job/marnix/job/metamath-eclipse-xtext/)
+
+The Eclipse update site resulting from [the last successful CloudBees build](https://buildhive.cloudbees.com/job/marnix/job/metamath-eclipse-xtext/lastSuccessfulBuild/) can often be found at https://buildhive.cloudbees.com/job/marnix/job/metamath-eclipse-xtext/ws/last-successful-updatesite/; however, I haven't yet found out where to store it more permanently.
 
 LICENSE: GPLv3
 
