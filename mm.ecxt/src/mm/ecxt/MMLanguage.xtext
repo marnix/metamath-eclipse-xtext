@@ -1,15 +1,29 @@
-grammar mm.ecxt.MMLanguage with org.eclipse.xtext.common.Terminals
+grammar mm.ecxt.MMLanguage
+
+import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 
 generate mmLanguage "urn:marnix:mm.exct/MMLanguage"
 
-MetamathDatabase:
-	statements+=statement*;
+MMDatabase:
+	WS? (statements+=statement)*;
 	
 statement:
-	constantStatement;
+	commentStatement | variableStatement;
 	
-constantStatement:
-    '$c' (id=MATHSYMBOL)+ '$.';
+commentStatement:
+	DOLLAR_C (symbols+=MATHSYMBOL)+ DOLLAR_DOT;
+	
+variableStatement:
+	DOLLAR_V (symbols+=MATHSYMBOL)+ DOLLAR_DOT;
     
-terminal MATHSYMBOL: 
-      ('!'..'#'|'%'..'~')+; 
+terminal WS : EOF | (' '|'\t'|'\r'|'\n')+;
+
+terminal DOLLAR_C: '$c' WS;
+terminal DOLLAR_V: '$v' WS;
+terminal DOLLAR_DOT: '$.' WS;
+terminal DOLLAR_PARENOPEN: '$(' WS;
+terminal DOLLAR_PARENCLOSE: '$)' WS;
+
+terminal MATHSYMBOL: ('!'..'#'|'%'..'~')+ WS; 
+terminal WORDWITHDOLLAR: ('!'..'~')+ WS;
+terminal ILLEGALCHAR: .;
