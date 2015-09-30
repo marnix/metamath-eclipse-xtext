@@ -61,6 +61,12 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
 									<fileset>
 										<directory>${basedir}/xtend-gen</directory>
 									</fileset>
+									<fileset>
+										<directory>${basedir}</directory>
+										<includes>
+											<include>plugin.xml_gen</include>
+										</includes>
+									</fileset>
 								</filesets>
 							</configuration>
 						</execution>
