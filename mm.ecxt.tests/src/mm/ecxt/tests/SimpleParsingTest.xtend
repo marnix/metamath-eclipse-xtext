@@ -1,17 +1,18 @@
 package mm.ecxt.tests
 
 import com.google.inject.Inject
+import java.util.Arrays
 import mm.ecxt.MMLanguageInjectorProvider
 import mm.ecxt.mmLanguage.MMDatabase
+import mm.ecxt.mmLanguage.commentStatement
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.junit4.util.ParseHelper
+import org.eclipse.xtext.junit4.validation.ValidationTestHelper
 import org.junit.Test
 import org.junit.runner.RunWith
 
 import static org.junit.Assert.*
-import org.eclipse.xtext.junit4.validation.ValidationTestHelper
-import java.util.Arrays
 
 @RunWith(XtextRunner)
 @InjectWith(MMLanguageInjectorProvider)
@@ -22,15 +23,15 @@ class SimpleParsingTest {
 	
 	@Test def void testParse() {
 		val mmDb = '''
-			$c |- $.
+			$c |- $. $( a comment! $)
 			$c wff $.
 			$c set class $.
 		'''.parse
 		assertNotNull(mmDb)
 		assertNoErrors(mmDb)
 		assertEquals(3, mmDb.statements.size)
-		assertEquals(Arrays.asList("|- "), mmDb.statements.get(0).symbols)
-		assertEquals(Arrays.asList("set ", "class "), mmDb.statements.get(2).symbols)
+		assertEquals(Arrays.asList("|-"), (mmDb.statements.get(0) as commentStatement).symbols)
+		assertEquals(Arrays.asList("set", "class"), (mmDb.statements.get(2) as commentStatement).symbols)
 	}
 	
 	@Test def void testParseOneError() {
@@ -39,9 +40,14 @@ class SimpleParsingTest {
 		    $c $.
 		    $c set $.
 		    $c xu $.
+		    $v a b c $.
+		    $d a b $.
+		    ${
+		    	wph $f wff ph $.
+		    $}
 		'''.parse
 		assertNotNull(mmDb)
 		assertEquals(1, validate(mmDb).size)
-		assertEquals(3, mmDb.statements.size)
+		assertEquals(6, mmDb.statements.size)
 	}
 }
