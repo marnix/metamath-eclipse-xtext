@@ -27,19 +27,29 @@ dvrStatement:
 	DOLLAR_D (symbols+=MATHSYMBOL)+ DOLLAR_DOT;
 	
 floatingHypothesisStatement:
-	MATHSYMBOL DOLLAR_F (symbols+=MATHSYMBOL)+ DOLLAR_DOT;
+	LABEL DOLLAR_F (symbols+=MATHSYMBOL)+ DOLLAR_DOT;
 	
 essentialHypothesisStatement:
-	MATHSYMBOL DOLLAR_E (symbols+=MATHSYMBOL)+ DOLLAR_DOT;
+	LABEL DOLLAR_E (symbols+=MATHSYMBOL)+ DOLLAR_DOT;
 	
 axiomStatement:
-	MATHSYMBOL DOLLAR_A (symbols+=MATHSYMBOL)+ DOLLAR_DOT;
+	LABEL DOLLAR_A (symbols+=MATHSYMBOL)+ DOLLAR_DOT;
 	
 proofStatement:
-	MATHSYMBOL DOLLAR_P (symbols+=MATHSYMBOL)+ '$=' (symbols+=MATHSYMBOL)+ DOLLAR_DOT;
+	LABEL DOLLAR_P (symbols+=MATHSYMBOL)+ '$=' proof=(normalProof|compressedProof) DOLLAR_DOT;
+	
+normalProof:
+	(labels+=(LABEL|QUESTIONMARK))+;
+	
+compressedProof:
+	PARENOPEN (labels+=LABEL)* PARENCLOSE (parts+=COMPRESSEDPART)+;
 	
 block:
 	'${' (statements+=statement)* '$}';
+	
+MATHSYMBOL: PARENOPEN | PARENCLOSE | QUESTIONMARK | COMPRESSED | TLABEL | WORD;
+LABEL: COMPRESSED | TLABEL;
+COMPRESSEDPART: QUESTIONMARK | COMPRESSED;
     
 terminal WS : (' '|'\t'|'\r'|'\n')+ | '$(' -> '$)';
 
@@ -52,4 +62,9 @@ terminal DOLLAR_A: '$a';
 terminal DOLLAR_P: '$p';
 terminal DOLLAR_DOT: '$.';
 
-terminal MATHSYMBOL: ('!'..'#'|'%'..'~')+;
+terminal PARENOPEN: '(';
+terminal PARENCLOSE: ')';
+terminal QUESTIONMARK: '?';
+terminal COMPRESSED: ('A'..'Z'|'?')+;
+terminal TLABEL: ('A'..'Z'|'a'..'z'|'0'..'9'|'-'|'_'|'.')+;
+terminal WORD: ('!'..'#'|'%'..'~')+;
