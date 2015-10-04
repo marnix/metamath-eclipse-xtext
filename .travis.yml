@@ -2,7 +2,7 @@ language: java
 sudo: false
 script: mvn -f mm.ecxt.parent/pom.xml install
 after_success:
- - mvn -f mm.ecxt.updatesite/pom.xml deploy --settings .travis-maven-settings.xml -DskipTests=true -DaltDeploymentRepository=oss-jfrog-snapshots::default::http://oss.jfrog.org/artifactory/oss-snapshot-local
+ - test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && mvn -f mm.ecxt.updatesite/pom.xml deploy --settings .travis-maven-settings.xml -DskipTests=true -DaltDeploymentRepository=oss-jfrog-snapshots::default::http://oss.jfrog.org/artifactory/oss-snapshot-local
 env:
   global:
     - secure: "WIfGlxC95LW3Gnw0VuxGZ6UZ/pm46zn1GQkzasvP+nLxSuUtYjBQFi4XWkfhGJ4xI2mrvdn8RFAQzUrupKDxBoNK1qDFvRP2j+wzJiONKetGM7AjYuVb5FI9ljkawG03NziuNJPpLMUY2bmeuu0ZVbEGmu4AkVlMYEr3dFlQNE5Gs3G+2d6I+sAS8/hpmcTsszcdMTzwH2l6clZD47DvzTDnDxoZDOjNssW+izSWTHeGKFLgVlxBqDyHyt3j8+lw4ymQhDncdFgOu51LaQ2JjkSPcTw18EGIvD4QUzzHV3RlRlr77B9MgRg4v2yyA7WW2azR1HI7EoZrmHFSIbqRzIqMhJMGxe5fynsh4/wq3PswuSrZsCUoyM5q/YSJkgaMZm4c/U9ozXw7XVqLJBbPvVC3xWe5UKTg8yXQMXD8V/2+26Tg1Yq2YPTpTMqvhsQX/OvaElkhehMcw7owD4gT+/L+H2OlC68nqfOONYEHxpFZotQv3NuYxE3EkI2nDaCbH9PrrCL67N3Cii40kO7sV1WrC2UfG+k4H8VXZrH264fjOCRKPTUhjKda+Xso/byQiByRosjYdmnjaOKXVENcIN/7md8kTsMFJ8xfGBn0P9jK0pUUNZ1/5YcDn6mYfVOh2vU2xZQFk8Nb/0InGcfmgKxrkwth5njDTErgvS8ggTQ="
