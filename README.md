@@ -1,12 +1,14 @@
 Metamath plugin for Eclipse based on Xtext
 ==========================================
 
-TravisCI says: [![Build Status](https://travis-ci.org/marnix/metamath-eclipse-xtext.svg?branch=master)](https://travis-ci.org/marnix/metamath-eclipse-xtext)
+Travis CI says: [![Build Status](https://travis-ci.org/marnix/metamath-eclipse-xtext.svg?branch=master)](https://travis-ci.org/marnix/metamath-eclipse-xtext)
 
 CloudBees says: [![Build Status](https://buildhive.cloudbees.com/job/marnix/job/metamath-eclipse-xtext/badge/icon)](https://buildhive.cloudbees.com/job/marnix/job/metamath-eclipse-xtext/)
 
-The Eclipse update site resulting from [the last successful CloudBees build](https://buildhive.cloudbees.com/job/marnix/job/metamath-eclipse-xtext/lastSuccessfulBuild/) can often be found at https://buildhive.cloudbees.com/job/marnix/job/metamath-eclipse-xtext/ws/last-successful-updatesite/; however, I haven't yet found out where to store it more permanently.
+To install, point your Eclipse to the following update site (courtesy of the OSS Artifactory repository from JFrog): `jar:https://oss.jfrog.org/artifactory/libs-snapshot/mm/ecxt/mm.ecxt.updatesite/1.0.0-SNAPSHOT/mm.ecxt.updatesite-1.0.0-SNAPSHOT.zip!/` and select the MMLanguage SDK Feature.
+
+Before you try to open `set.mm`, make sure you run your Eclipse with `-Xmx4G`, and it still might hang on you unless you have a fast system.
 
 LICENSE: Eclipse Public License - v 1.0
 
-*Please note that this project is in the very early stages, and doesn't do anything yet.*  However, even if I don't find the time to continue on it, hopefully someone else might pick it up as a useful starting point...
+*Please note that this project is in the very early stages, and doesn't do much yet.*  However, even if I don't find the time to continue on it, hopefully someone else might pick it up as a useful starting point...
