@@ -3,8 +3,8 @@ package mm.ecxt.tests
 import com.google.inject.Inject
 import java.util.Arrays
 import mm.ecxt.MMLanguageInjectorProvider
+import mm.ecxt.mmLanguage.CommentStatement
 import mm.ecxt.mmLanguage.MMDatabase
-import mm.ecxt.mmLanguage.commentStatement
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.junit4.util.ParseHelper
@@ -13,6 +13,8 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 import static org.junit.Assert.*
+import mm.ecxt.mmLanguage.Block
+import mm.ecxt.mmLanguage.FloatingHypothesisStatement
 
 @RunWith(XtextRunner)
 @InjectWith(MMLanguageInjectorProvider)
@@ -30,8 +32,8 @@ class SimpleParsingTest {
 		assertNotNull(mmDb)
 		assertNoErrors(mmDb)
 		assertEquals(3, mmDb.statements.size)
-		assertEquals(Arrays.asList("|-"), (mmDb.statements.get(0) as commentStatement).symbols)
-		assertEquals(Arrays.asList("set", "class"), (mmDb.statements.get(2) as commentStatement).symbols)
+		assertEquals(Arrays.asList("|-"), (mmDb.statements.get(0) as CommentStatement).symbols)
+		assertEquals(Arrays.asList("set", "class"), (mmDb.statements.get(2) as CommentStatement).symbols)
 	}
 	
 	@Test def void testParseOneError() {
@@ -49,6 +51,7 @@ class SimpleParsingTest {
 		assertNotNull(mmDb)
 		assertEquals(1, validate(mmDb).size)
 		assertEquals(6, mmDb.statements.size)
+		assertEquals("ph", ((mmDb.statements.get(5) as Block).contents.statements.get(0) as FloatingHypothesisStatement).variable);
 	}
 	
 	@Test def void testParseDollarEInBlock() {
