@@ -4,8 +4,10 @@ import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 
 generate mmLanguage "urn:marnix:mm.exct/MMLanguage"
 
+
 MMDatabase:
 	(statements+=Statement)*;
+	
 	
 Statement:
 	CommentStatement |
@@ -24,31 +26,35 @@ CommentStatement:
 	DOLLAR_C (symbols+=MATHSYMBOL)+ DOLLAR_DOT;
 	
 VariableStatement:
-	DOLLAR_V (symbols+=MATHSYMBOL)+ DOLLAR_DOT;
-	
+	DOLLAR_V (variables+=VarDecl)+ DOLLAR_DOT;
+
 DvrStatement:
 	DOLLAR_D (symbols+=MATHSYMBOL)+ DOLLAR_DOT;
 	
 FloatingHypothesisStatement:
-	label=LABEL DOLLAR_F constant=MATHSYMBOL variable=MATHSYMBOL DOLLAR_DOT;
+	name=LABEL DOLLAR_F constant=MATHSYMBOL variable=[VarDecl|MATHSYMBOL] DOLLAR_DOT;
 	
 EssentialHypothesisStatement:
-	label=LABEL DOLLAR_E (symbols+=MATHSYMBOL)+ DOLLAR_DOT;
+	name=LABEL DOLLAR_E (symbols+=MATHSYMBOL)+ DOLLAR_DOT;
 	
 AxiomStatement:
-	label=LABEL DOLLAR_A (symbols+=MATHSYMBOL)+ DOLLAR_DOT;
+	name=LABEL DOLLAR_A (symbols+=MATHSYMBOL)+ DOLLAR_DOT;
 	
 ProofStatement:
-	label=LABEL DOLLAR_P (symbols+=MATHSYMBOL)+ '$=' proof=(NormalProof|CompressedProof) DOLLAR_DOT;
+	name=LABEL DOLLAR_P (symbols+=MATHSYMBOL)+ '$=' proof=(NormalProof|CompressedProof) DOLLAR_DOT;
 	
 NormalProof:
-	(labels+=(LABEL|QUESTIONMARK))+;
+	(labels+=[LabeledStatement|LABEL] | labels+=[LabeledStatement|QUESTIONMARK])+;
 	
 CompressedProof:
-	PARENOPEN (labels+=LABEL)* PARENCLOSE (parts+=COMPRESSEDPART)+;
+	PARENOPEN (labels+=[LabeledStatement|LABEL])* PARENCLOSE (parts+=COMPRESSEDPART)+;
 	
 Block:
 	'${' contents=MMDatabase '$}';
+
+
+VarDecl returns VarDecl: name=MATHSYMBOL;
+		
 	
 MATHSYMBOL: PARENOPEN | PARENCLOSE | QUESTIONMARK | COMPRESSED | TLABEL | WORD;
 LABEL: COMPRESSED | TLABEL;
