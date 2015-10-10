@@ -5,7 +5,7 @@ Travis CI says: [![Build Status](https://travis-ci.org/marnix/metamath-eclipse-x
 
 CloudBees says: [![Build Status](https://buildhive.cloudbees.com/job/marnix/job/metamath-eclipse-xtext/badge/icon)](https://buildhive.cloudbees.com/job/marnix/job/metamath-eclipse-xtext/)
 
-To install, point your Eclipse to the following update site (courtesy of the OSS Artifactory repository from JFrog): `jar:https://oss.jfrog.org/artifactory/libs-snapshot/mm/ecxt/mm.ecxt.updatesite/1.0.0-SNAPSHOT/mm.ecxt.updatesite-1.0.0-SNAPSHOT.zip!/` and select the MMLanguage SDK Feature.
+To install, point your Eclipse to the following update site (courtesy of the OSS Artifactory repository from JFrog): `jar:https://oss.jfrog.org/artifactory/libs-snapshot/mm/ecxt/mm.ecxt.updatesite/1.0.0-SNAPSHOT/mm.ecxt.updatesite-1.0.0-SNAPSHOT.zip!/` and select the MMLanguage SDK Feature.  (Note that this update site is large, so it might take a while to download and install: it is a single 70+ MB zip-file, which also contains Xtext and all other dependencies.  This should be replaced by a very small update site which points to the Xtext update site.  I don't yet know how to best fight Tycho on this point.)
 
 Before you try to open `set.mm`, make sure you run your Eclipse with `-Xmx4G`, and it still might hang on you unless you have a fast system.
 
