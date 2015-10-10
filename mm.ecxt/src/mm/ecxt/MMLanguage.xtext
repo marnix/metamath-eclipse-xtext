@@ -23,16 +23,16 @@ LabeledStatement:
 	ProofStatement;
 
 CommentStatement:
-	DOLLAR_C (symbols+=MATHSYMBOL)+ DOLLAR_DOT;
+	DOLLAR_C (constants+=ConstDecl)+ DOLLAR_DOT;
 	
 VariableStatement:
 	DOLLAR_V (variables+=VarDecl)+ DOLLAR_DOT;
 
 DvrStatement:
-	DOLLAR_D (symbols+=MATHSYMBOL)+ DOLLAR_DOT;
+	DOLLAR_D (variables+=[VarDecl|MATHSYMBOL])+ DOLLAR_DOT;
 	
 FloatingHypothesisStatement:
-	name=LABEL DOLLAR_F constant=MATHSYMBOL variable=[VarDecl|MATHSYMBOL] DOLLAR_DOT;
+	name=LABEL DOLLAR_F constant=[ConstDecl|MATHSYMBOL] variable=[VarDecl|MATHSYMBOL] DOLLAR_DOT;
 	
 EssentialHypothesisStatement:
 	name=LABEL DOLLAR_E (symbols+=MATHSYMBOL)+ DOLLAR_DOT;
@@ -52,6 +52,8 @@ CompressedProof:
 Block:
 	'${' contents=MMDatabase '$}';
 
+
+ConstDecl returns ConstDecl: name=MATHSYMBOL;
 
 VarDecl returns VarDecl: name=MATHSYMBOL;
 		

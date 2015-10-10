@@ -33,8 +33,8 @@ class SimpleParsingTest {
 		assertNotNull(mmDb)
 		assertNoErrors(mmDb)
 		assertEquals(3, mmDb.statements.size)
-		assertEquals(Arrays.asList("|-"), (mmDb.statements.get(0) as CommentStatement).symbols)
-		assertEquals(Arrays.asList("set", "class"), (mmDb.statements.get(2) as CommentStatement).symbols)
+		assertEquals(Arrays.asList("|-"), (mmDb.statements.get(0) as CommentStatement).constants.map([c | c.name]))
+		assertEquals(Arrays.asList("set", "class"), (mmDb.statements.get(2) as CommentStatement).constants.map([c | c.name]))
 	}
 	
 	@Test def void testParseOneError() {
@@ -42,9 +42,9 @@ class SimpleParsingTest {
 		    $c class $.
 		    $c $.
 		    $c set $.
-		    $c xu $.
+		    $c wff $.
 		    $v ph b c $.
-		    $d a b $.
+		    $d b ph $.
 		    ${
 		    	wph $f wff ph $.
 		    $}
