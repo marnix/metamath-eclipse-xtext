@@ -14,9 +14,9 @@ Travis CI says: [![Build Status](https://travis-ci.org/marnix/metamath-eclipse-x
 
 CloudBees says: [![Build Status](https://buildhive.cloudbees.com/job/marnix/job/metamath-eclipse-xtext/badge/icon)](https://buildhive.cloudbees.com/job/marnix/job/metamath-eclipse-xtext/)
 
-# LICENSE
+# License
 
-The code in this repository is licensed under the Eclipse Public License - v 1.0; see LICENSE.md for details.
+The code in this repository is licensed under the Eclipse Public License - v 1.0; see LICENSE.txt for details.
 
 # Installation instructions
 
