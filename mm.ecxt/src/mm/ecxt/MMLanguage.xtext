@@ -35,13 +35,13 @@ FloatingHypothesisStatement:
 	name=LABEL DOLLAR_F constant=[ConstDecl|MATHSYMBOL] variable=[VarDecl|MATHSYMBOL] DOLLAR_DOT;
 	
 EssentialHypothesisStatement:
-	name=LABEL DOLLAR_E (symbols+=MATHSYMBOL)+ DOLLAR_DOT;
+	name=LABEL DOLLAR_E (symbols+=[Decl|MATHSYMBOL])+ DOLLAR_DOT;
 	
 AxiomStatement:
-	name=LABEL DOLLAR_A (symbols+=MATHSYMBOL)+ DOLLAR_DOT;
+	name=LABEL DOLLAR_A (symbols+=[Decl|MATHSYMBOL])+ DOLLAR_DOT;
 	
 ProofStatement:
-	name=LABEL DOLLAR_P (symbols+=MATHSYMBOL)+ '$=' proof=(NormalProof|CompressedProof) DOLLAR_DOT;
+	name=LABEL DOLLAR_P (symbols+=[Decl|MATHSYMBOL])+ '$=' proof=(NormalProof|CompressedProof) DOLLAR_DOT;
 	
 NormalProof:
 	(labels+=[LabeledStatement|LABEL] | labels+=[LabeledStatement|QUESTIONMARK])+;
@@ -52,6 +52,8 @@ CompressedProof:
 Block:
 	'${' contents=MMDatabase '$}';
 
+
+Decl: ConstDecl | VarDecl;
 
 ConstDecl returns ConstDecl: name=MATHSYMBOL;
 

@@ -71,10 +71,12 @@ class SimpleParsingTest {
 	
 	@Test def void testParseDollarEInBlock() {
 		val mmDb = '''
+			$c |- $.
+			$v ph $.
 			${ dummylink.1 $e |- ph $. $}
 		'''.parse
 		assertNotNull(mmDb)
 		assertNoErrors(mmDb)
-		assertEquals(1, mmDb.statements.size)
+		assertEquals(3, mmDb.statements.size)
 	}
 }
