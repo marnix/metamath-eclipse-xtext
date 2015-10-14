@@ -10,7 +10,7 @@ var projectName = "mm.ecxt"
 // grammarURI has to be platform:/resource as it is not on the classpath
 var grammarURI = "platform:/resource/${projectName}/src/mm/ecxt/MMLanguage.xtext"
 var runtimeProject = "../${projectName}"
-var generateXtendStub = true
+var generateXtendStub = false
 var encoding = "UTF-8"
 
 Workflow {
