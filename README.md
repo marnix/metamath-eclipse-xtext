@@ -49,7 +49,6 @@ For now in random order.
  - Make everything clickable / reference.
  - Bugfix: allow only backwards references.
  - Support `$[ ... $]` include statements, including references.
- - Create a 'rename' refactoring.
  - Add additional proof refactorings, such as changing the order of the hypotheses
    of a statement.
  - Fix the names-with-dots bug (e.g., a variable names `./\` should be allowed).
