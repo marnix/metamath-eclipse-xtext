@@ -68,4 +68,14 @@ For now in random order.
  - Bugfix: Don't treat a `?` in a proof as a parse error, and instead generate
    a warning.
  - Support multiple versions of Eclipse.
+ - Try to get rid of Xtend, if possible.
+ - When showing a tooltip for a label, show the (formatted-as-on-website) comment
+   that precedes that label.
+ - Remove leftovers from the sample project, visible in Preferences (mwe2,
+   'compilation' setting).
+ - Don't show Xtext-related labels (e.g., in the generated markers).
+ - Try to replace Xtext nature by a custom Metamath nature.
+ - Make the performance acceptable for `set.mm`, e.g., by using the tips from
+   https://www.eclipsecon.org/na2015/sites/default/files/slides/Scaling%20Xtext.pdf
+   and http://www.sigasi.com/content/view-complexity-your-xtext-ecore-model
  - _Undoubtedly there is more..._
