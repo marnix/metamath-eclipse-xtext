@@ -10,7 +10,7 @@ MMDatabase:
 	
 	
 Statement:
-	CommentStatement |
+	ConstantStatement |
 	VariableStatement |
 	DvrStatement |
 	LabeledStatement |
@@ -22,7 +22,7 @@ LabeledStatement:
 	AxiomStatement |
 	ProofStatement;
 
-CommentStatement:
+ConstantStatement:
 	DOLLAR_C (constants+=ConstDecl)+ DOLLAR_DOT;
 	
 VariableStatement:
