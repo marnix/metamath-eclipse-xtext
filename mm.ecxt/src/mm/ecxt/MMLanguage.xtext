@@ -1,4 +1,4 @@
-grammar mm.ecxt.MMLanguage hidden(WS)
+grammar mm.ecxt.MMLanguage hidden(WS, COMMENT)
 
 import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 
@@ -64,7 +64,8 @@ MATHSYMBOL: PARENOPEN | PARENCLOSE | QUESTIONMARK | COMPRESSED | TLABEL | WORD;
 LABEL: COMPRESSED | TLABEL;
 COMPRESSEDPART: QUESTIONMARK | COMPRESSED;
     
-terminal WS : (' '|'\t'|'\r'|'\n')+ | '$(' -> '$)';
+terminal WS : (' '|'\t'|'\r'|'\n')+;
+terminal COMMENT : '$(' -> '$)';
 
 terminal DOLLAR_C: '$c';
 terminal DOLLAR_V: '$v';
