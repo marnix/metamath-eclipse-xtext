@@ -58,29 +58,85 @@ class SimpleParsingTest {
 		assertEquals("ph",
 			((mmDb.statements.get(5) as Block).contents.statements.get(0) as FloatingHypothesisStatement).variable.
 				name);
-			}
+	}
 
-			@Ignore
-			@Test def void testVarNameWithDots() {
-				val mmDb = '''
-					$v .ph $.
-					wph $f wff .ph $.
-				'''.parse
-				assertNotNull(mmDb)
-				assertEquals(2, mmDb.statements.size)
-				val validationErrors = validate(mmDb)
-				assertEquals(0, validationErrors.size)
-				assertEquals(".ph", (mmDb.statements.get(1) as FloatingHypothesisStatement).variable.name);
-			}
+	@Ignore
+	@Test def void testVarNameWithDots() {
+		val mmDb = '''
+			$v .ph $.
+			wph $f wff .ph $.
+		'''.parse
+		assertNotNull(mmDb)
+		assertEquals(2, mmDb.statements.size)
+		val validationErrors = validate(mmDb)
+		assertEquals(0, validationErrors.size)
+		assertEquals(".ph", (mmDb.statements.get(1) as FloatingHypothesisStatement).variable.name);
+	}
 
-			@Test def void testParseDollarEInBlock() {
-				val mmDb = '''
-					$c |- $.
-					$v ph $.
-					${ dummylink.1 $e |- ph $. $}
-				'''.parse
-				assertNotNull(mmDb)
-				assertNoErrors(mmDb)
-				assertEquals(3, mmDb.statements.size)
-			}
-		}
+	@Test def void testParseDollarEInBlock() {
+		val mmDb = '''
+			$c |- $.
+			$v ph $.
+			${ dummylink.1 $e |- ph $. $}
+		'''.parse
+		assertNotNull(mmDb)
+		assertNoErrors(mmDb)
+		assertEquals(3, mmDb.statements.size)
+	}
+
+	@Test def void testNoForwardConstantAndVariableReferences() {
+		val mmDb = '''
+			${ dummylink.1 $e |- ph $. $}
+			$c |- $.
+			$v ph $.
+		'''.parse
+		assertNotNull(mmDb)
+		val validationErrors = validate(mmDb)
+		assertEquals(2, validationErrors.size)
+		assertEquals(3, mmDb.statements.size)
+	}
+
+	@Test def void testReferenceToAxiomOrProofInNestedScope() {
+		val mmDb = '''
+			$c wff |- true $.
+			$v ph $.
+			wph $f wff ph $.
+			wtrue $a wff true $.
+			${
+				axiom $a |- true $.
+				${
+					theorem.1 $e |- ph $.
+					theorem $p |- ph $= theorem.1 $.
+				$}
+			$}
+			x $p |- true $= wtrue axiom theorem $.
+		'''.parse
+		assertNotNull(mmDb)
+		val validationErrors = validate(mmDb)
+		assertEquals(0, validationErrors.size)
+		assertEquals(6, mmDb.statements.size)
+	}
+
+	@Test def void noReferenceToHypothesisInNestedScope() {
+		val mmDb = '''
+			$c wff |- true $.
+			$v ph $.
+			wph $f wff ph $.
+			wtrue $a wff true $.
+			${
+				axiom $a |- true $.
+				${
+					theorem.1 $e |- ph $.
+				$}
+				${
+					theorem $p |- ph $= theorem.1 $.
+				$}
+			$}
+			x $p |- true $= wtrue axiom theorem $.
+		'''.parse
+		assertNotNull(mmDb)
+		val validationErrors = validate(mmDb)
+		assertEquals(1, validationErrors.size)
+		assertEquals(6, mmDb.statements.size)
+	}
+}

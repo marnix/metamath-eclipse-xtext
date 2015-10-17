@@ -46,8 +46,6 @@ For now in random order.
  - Auto-complete a `?` proof step with the applicable steps.
  - When auto-completing `?`, prefer 'windowing' steps which allow 'zooming in'
    on a subexpression, or which allow transitive steps.
- - Make everything clickable / reference.
- - Bugfix: allow only backwards references.
  - Support `$[ ... $]` include statements, including references.
  - Add additional proof refactorings, such as changing the order of the hypotheses
    of a statement.
