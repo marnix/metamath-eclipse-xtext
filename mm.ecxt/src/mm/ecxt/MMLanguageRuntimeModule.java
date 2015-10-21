@@ -3,9 +3,32 @@
  */
 package mm.ecxt;
 
+import org.eclipse.xtext.naming.IQualifiedNameConverter;
+import org.eclipse.xtext.naming.QualifiedName;
+
+import com.google.inject.Singleton;
+
 /**
  * Use this class to register components to be used at runtime / without the Equinox extension registry.
  */
 public class MMLanguageRuntimeModule extends mm.ecxt.AbstractMMLanguageRuntimeModule {
 
+	public Class<? extends IQualifiedNameConverter> bindIQualifiedNameConverter() {
+		return SingleElementQualifiedNameConverter.class;
+	}
+
+	@Singleton
+	public static class SingleElementQualifiedNameConverter implements IQualifiedNameConverter {
+
+		@Override
+		public String toString(QualifiedName name) {
+			return name.toString("-UNUSED-DELIMITER-");
+		}
+
+		@Override
+		public QualifiedName toQualifiedName(String qualifiedNameAsText) {
+			return QualifiedName.create(qualifiedNameAsText);
+		}
+
+	}
 }

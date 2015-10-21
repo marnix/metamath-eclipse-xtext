@@ -66,7 +66,6 @@ For now in random order.
    parsed in exactly one way.
  - Create a small update site which points to the Xtext update site, instead
    of including all of Xtext in our own update site resulting in 70+MB.
- - Bugfix: Don't make 'ph.' refer to something named 'ph'.
  - Bugfix: Don't treat a `?` in a proof as a parse error, and instead generate
    a warning.
  - Support multiple versions of Eclipse.

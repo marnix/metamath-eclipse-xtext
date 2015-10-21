@@ -73,7 +73,6 @@ class SimpleParsingTest {
 		assertEquals(".ph", (mmDb.statements.get(2) as FloatingHypothesisStatement).variable.name);
 	}
 
-	@Ignore
 	@Test def void testVarNameEndingWithDot() {
 		val mmDb = '''
 			$c wff $.
