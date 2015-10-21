@@ -14,7 +14,6 @@ import org.eclipse.xtext.scoping.impl.FilteringScope;
 import com.google.common.base.Predicate;
 
 import mm.ecxt.mmLanguage.AxiomStatement;
-import mm.ecxt.mmLanguage.Block;
 import mm.ecxt.mmLanguage.ConstDecl;
 import mm.ecxt.mmLanguage.MMDatabase;
 import mm.ecxt.mmLanguage.ProofStatement;
@@ -30,11 +29,19 @@ import mm.ecxt.mmLanguage.VarDecl;
 public class MMLanguageScopeProvider extends AbstractDeclarativeScopeProvider {
 
 	private static boolean isValidReference(EObject source, EObject target) {
-		boolean targetNotVisibleAfterBlock = !(target instanceof ConstDecl || target instanceof AxiomStatement
-				|| target instanceof ProofStatement);
-		if (targetNotVisibleAfterBlock) {
+		if (target.eContainer() == null) {
+			// TODO: Implement references to $[ ... $] included file
+			return false;
+		}
+		boolean targetVisibleAfterBlock = target instanceof ConstDecl || target instanceof AxiomStatement
+				|| target instanceof ProofStatement;
+		if (!targetVisibleAfterBlock) {
+			// First we make sure that the source is in the target's block
 			EObject targetBlock = target instanceof VarDecl ? target.eContainer().eContainer() : target.eContainer();
-			assert targetBlock instanceof Block || targetBlock instanceof MMDatabase;
+			if (!(targetBlock instanceof MMDatabase)) {
+				// this should not occur, but for robustness we'll stop here
+				return false;
+			}
 			if (!contains(targetBlock, source)) {
 				return false;
 			}
