@@ -37,7 +37,6 @@ I have only tested so far with Eclipse Mars R.
 
 For now in random order.
 
- - Add syntax highlighting/coloring for keywords.
  - Add syntax highlighting/coloring for `` math symbol sequence `` in comments.
  - Create 'refactoring' action to reformat a proof in a 'calculational' format,
    where every 'non-syntax' step is on its own line, the indentation of that
@@ -54,7 +53,6 @@ For now in random order.
  - Support `$[ ... $]` include statements, including references.
  - Add additional proof refactorings, such as changing the order of the hypotheses
    of a statement.
- - Fix the names-with-dots bug (e.g., a variable names `./\` should be allowed).
  - Properly validate use of whitespace, either in the parser/grammar or separately.
  - Additional validations, like "no `$c` in a nested scope" etc.
  - Validate proofs.  (If necessary for performance: only the 'current' proof,
@@ -77,7 +75,7 @@ For now in random order.
  - Remove leftovers from the sample project, visible in Preferences (mwe2,
    'compilation' setting).
  - Don't show Xtext-related labels (e.g., in the generated markers).
- - Try to replace Xtext nature by a custom Metamath nature.
+   Try to replace Xtext nature by a custom Metamath nature.
  - Make the performance acceptable for `set.mm`, e.g., by using the tips from
    https://www.eclipsecon.org/na2015/sites/default/files/slides/Scaling%20Xtext.pdf
    and http://www.sigasi.com/content/view-complexity-your-xtext-ecore-model
