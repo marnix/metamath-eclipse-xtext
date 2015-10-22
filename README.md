@@ -33,6 +33,21 @@ I have only tested so far with Eclipse Mars R.
 
 *Note about large files.* Before you try to open `set.mm` (which is 20+MB these days), make sure you run your Eclipse with `-Xmx4G` in the proper place in your `eclipse.ini`.  And then it still might hang on you unless you have a fast system.  You also probably want to close the Outline view.
 
+# Acknowledgements
+
+This project would not have been possible without [Xtext](https://www.eclipse.org/Xtext/), which forms the core and basis
+of this plug-in.
+
+Support and useful notes came from
+[the Xtext documentation](https://www.eclipse.org/Xtext/documentation/),
+[Ray Wu's blog posts on Xtext](http://rayjcwu.logdown.com/tags/xtext),
+Dave Murray-Rust's blog post [Creating a Syntax Highlighting, Outlining editor with Eclipse and XText](http://www.mo-seph.com/projects/syntaxhighlighting),
+[Sebastian Zarnekow's blog posts on Xtext](https://zarnekow.blogspot.com/search/label/Xtext),
+[the Xtext community forum](https://www.eclipse.org/forums/index.php/f/27/),
+and [Stack Overflow](https://stackoverflow.com/questions/tagged/xtext).
+
+And of course thanks to the Eclipse project for building a great IDE framework!
+
 # TODO list
 
 I'd like to extend this project in several areas: here is a somewhat structured and prioritized to-do list.
