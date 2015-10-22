@@ -35,48 +35,71 @@ I have only tested so far with Eclipse Mars R.
 
 # TODO list
 
-For now in random order.
+I'd like to extend this project in several areas: here is a somewhat structured and prioritized to-do list.
 
+## Viewing correct and complete files
+
+ - Add syntax highlighting/coloring for variables/constants.
  - Add syntax highlighting/coloring for `` math symbol sequence `` in comments.
+ - Support `$[ ... $]` include statements, including references.
+   Note that it will be very difficult to allow this in arbitrary places:
+   I will only allow it on the 'statement' level, so in any place where a $c/v/f/e/d/a/p statement is allowed.
+ - When showing a tooltip for a label, show the (formatted-as-on-website) comment
+   that precedes that label (for $a/$p/$e/$f) or that follows the declaration (for $c/$v).
+ - Try and render math symbols as Unicode characters, based on set.mm's `$t` info.
+
+## Proof assistant
+
  - Create 'refactoring' action to reformat a proof in a 'calculational' format,
    where every 'non-syntax' step is on its own line, the indentation of that
    step is based on the number non-syntax expressions that are left on the
    stack after the step, and the line below the step shows the resulting
    expression in `$( `` ... `` $)` format.
- - Create 'refactoring' action to reformat in compressed format.
- - Create 'refactoring' action to reformat in normal format.
- - Create 'refactoring' action to reformat in 'lemmon' format.
- - Create 'refactoring' action to reformat in 'indented-as-on-website' format.
  - Auto-complete a `?` proof step with the applicable steps.
  - When auto-completing `?`, prefer 'windowing' steps which allow 'zooming in'
    on a subexpression, or which allow transitive steps.
- - Support `$[ ... $]` include statements, including references.
  - Add additional proof refactorings, such as changing the order of the hypotheses
    of a statement.
+ - For completeness: 
+    - Create 'refactoring' action to reformat in compressed format.
+    - Create 'refactoring' action to reformat in normal format.
+    - Create 'refactoring' action to reformat in 'lemmon' format.
+    - Create 'refactoring' action to reformat in 'indented-as-on-website' format.
+   
+## Detecting errors
+
+ - Bugfix: Don't treat a `?` in a proof as a parse error, and instead generate
+   a warning.
  - Properly validate use of whitespace, either in the parser/grammar or separately.
  - Additional validations, like "no `$c` in a nested scope" etc.
  - Validate proofs.  (If necessary for performance: only the 'current' proof,
    or only when modifying one.)
- - Try and render math symbols as Unicode characters, based on set.mm's `$t` info.
- - Define an Eclipse plug-in extension point for injecting custom proof
-   engines, like Mario Carneiro's calculator for automatically prove basic
-   facts about numbers.
- - Efficient Outline view which is helpful for large files (like `set.mm`).
  - Syntax validation, to make sure that every statement's math string can be
    parsed in exactly one way.
+ 
+## Performance
+
+ - Make the performance acceptable for `set.mm`, e.g., by using the tips from
+   https://www.eclipsecon.org/na2015/sites/default/files/slides/Scaling%20Xtext.pdf
+   and http://www.sigasi.com/content/view-complexity-your-xtext-ecore-model
+ - Efficient Outline view which is helpful for large files (like `set.mm`).
  - Create a small update site which points to the Xtext update site, instead
    of including all of Xtext in our own update site resulting in 70+MB.
- - Bugfix: Don't treat a `?` in a proof as a parse error, and instead generate
-   a warning.
  - Support multiple versions of Eclipse.
- - Try to get rid of Xtend, if possible.
- - When showing a tooltip for a label, show the (formatted-as-on-website) comment
-   that precedes that label.
+ 
+## Clean-up
+
  - Remove leftovers from the sample project, visible in Preferences (mwe2,
    'compilation' setting).
  - Don't show Xtext-related labels (e.g., in the generated markers).
    Try to replace Xtext nature by a custom Metamath nature.
- - Make the performance acceptable for `set.mm`, e.g., by using the tips from
-   https://www.eclipsecon.org/na2015/sites/default/files/slides/Scaling%20Xtext.pdf
-   and http://www.sigasi.com/content/view-complexity-your-xtext-ecore-model
- - _Undoubtedly there is more..._
+ - Try to get rid of Xtend, if possible.  (I prefer a pure Java approach, to make
+   this project more 'hackable' for people who don't know Xtend, and don't want
+   to install the Xtend IDE for developing it.)
+ 
+## Extensibility
+
+ - Define an Eclipse plug-in extension point for injecting custom proof
+   engines, like Mario Carneiro's calculator for automatically prove basic
+   facts about numbers.
+   
