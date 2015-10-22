@@ -61,6 +61,7 @@ I'd like to extend this project in several areas: here is a somewhat structured 
    I will only allow it on the 'statement' level, so in any place where a $c/v/f/e/d/a/p statement is allowed.
  - When showing a tooltip for a label, show the (formatted-as-on-website) comment
    that precedes that label (for $a/$p/$e/$f) or that follows the declaration (for $c/$v).
+ - In non-compressed proof formats, highlight the non-syntax steps.
  - Try and render math symbols as Unicode characters, based on set.mm's `$t` info.
 
 ## Proof assistant
@@ -97,6 +98,8 @@ I'd like to extend this project in several areas: here is a somewhat structured 
  - Make the performance acceptable for `set.mm`, e.g., by using the tips from
    https://www.eclipsecon.org/na2015/sites/default/files/slides/Scaling%20Xtext.pdf
    and http://www.sigasi.com/content/view-complexity-your-xtext-ecore-model
+ - Add a refactoring to split a large .mm file using `$[` statements, just like
+   https://github.com/sorear/set.mm-history does.
  - Efficient Outline view which is helpful for large files (like `set.mm`).
  - Create a small update site which points to the Xtext update site, instead
    of including all of Xtext in our own update site resulting in 70+MB.
