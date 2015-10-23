@@ -41,7 +41,7 @@ AxiomStatement:
 	name=LABEL DOLLAR_A (symbols+=[Decl|MATHSYMBOL])+ DOLLAR_DOT;
 	
 ProofStatement:
-	name=LABEL DOLLAR_P (symbols+=[Decl|MATHSYMBOL])+ '$=' proof=(NormalProof|CompressedProof) DOLLAR_DOT;
+	name=LABEL DOLLAR_P (symbols+=[Decl|MATHSYMBOL])+ DOLLAR_EQUALS proof=(NormalProof|CompressedProof) DOLLAR_DOT;
 	
 NormalProof:
 	(labels+=[LabeledStatement|LABEL] | labels+=[LabeledStatement|QUESTIONMARK])+;
@@ -50,7 +50,7 @@ CompressedProof:
 	PARENOPEN (labels+=[LabeledStatement|LABEL])* PARENCLOSE (parts+=COMPRESSEDPART)+;
 	
 Block:
-	'${' contents=MMDatabase '$}';
+	DOLLAR_BRACEOPEN contents=MMDatabase DOLLAR_BRACECLOSE;
 
 
 Decl: ConstDecl | VarDecl;
@@ -65,7 +65,7 @@ LABEL: COMPRESSED | TLABEL;
 COMPRESSEDPART: QUESTIONMARK | COMPRESSED;
     
 terminal WS : (' '|'\t'|'\r'|'\n')+;
-terminal COMMENT : '$(' -> '$)';
+terminal COMMENT : DOLLAR_PARENOPEN -> DOLLAR_PARENCLOSE;
 
 terminal DOLLAR_C: '$c';
 terminal DOLLAR_V: '$v';
@@ -75,6 +75,11 @@ terminal DOLLAR_E: '$e';
 terminal DOLLAR_A: '$a';
 terminal DOLLAR_P: '$p';
 terminal DOLLAR_DOT: '$.';
+terminal DOLLAR_EQUALS: '$=';
+terminal DOLLAR_PARENOPEN: '$(';
+terminal DOLLAR_PARENCLOSE: '$)';
+terminal DOLLAR_BRACEOPEN: '${';
+terminal DOLLAR_BRACECLOSE: '$}';
 
 terminal PARENOPEN: '(';
 terminal PARENCLOSE: ')';
