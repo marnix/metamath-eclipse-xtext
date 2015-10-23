@@ -59,6 +59,8 @@ I'd like to extend this project in several areas: here is a somewhat structured 
  - Support `$[ ... $]` include statements, including references.
    Note that it will be very difficult to allow this in arbitrary places:
    I will only allow it on the 'statement' level, so in any place where a $c/v/f/e/d/a/p statement is allowed.
+   Question: How to treat a file that is imported in two otherwise related .mm files,
+   possibly in a different 'context'?
  - When showing a tooltip for a label, show the (formatted-as-on-website) comment
    that precedes that label (for $a/$p/$e/$f) or that follows the declaration (for $c/$v).
  - In non-compressed proof formats, highlight the non-syntax steps.
@@ -88,13 +90,16 @@ I'd like to extend this project in several areas: here is a somewhat structured 
    a warning.
  - Properly validate use of whitespace, either in the parser/grammar or separately.
  - Additional validations, like "no `$c` in a nested scope" etc.
- - Validate proofs.  (If necessary for performance: only the 'current' proof,
-   or only when modifying one.)
+ - Validate proofs.  If necessary for performance: only the 'current' proof,
+   or only when modifying one.  Or probably better: treat this like unit tests,
+   with a separate 'Verify Proofs' command complete with green/red(/yellow) progress indicator.
  - Syntax validation, to make sure that every statement's math string can be
    parsed in exactly one way.
  
 ## Performance
 
+ - As a performance stop-gap, perhaps we can automatically switch to the normal
+   text editor for files that are too large to handle?
  - Make the performance acceptable for `set.mm`, e.g., by using the tips from
    https://www.eclipsecon.org/na2015/sites/default/files/slides/Scaling%20Xtext.pdf
    and http://www.sigasi.com/content/view-complexity-your-xtext-ecore-model
