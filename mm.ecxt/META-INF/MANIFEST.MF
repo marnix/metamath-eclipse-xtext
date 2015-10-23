@@ -23,6 +23,7 @@ Import-Package: org.apache.log4j,
  org.eclipse.xtext.xbase.lib
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Export-Package: mm.ecxt,
+ mm.ecxt.core,
  mm.ecxt.formatting,
  mm.ecxt.scoping,
  mm.ecxt.validation,

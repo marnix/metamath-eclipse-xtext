@@ -4,9 +4,11 @@ import com.google.inject.Inject
 import java.util.Arrays
 import mm.ecxt.MMLanguageInjectorProvider
 import mm.ecxt.mmLanguage.Block
+import mm.ecxt.mmLanguage.CompressedProof
 import mm.ecxt.mmLanguage.ConstantStatement
 import mm.ecxt.mmLanguage.FloatingHypothesisStatement
 import mm.ecxt.mmLanguage.MMDatabase
+import mm.ecxt.mmLanguage.ProofStatement
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.junit4.util.ParseHelper
@@ -151,4 +153,28 @@ class SimpleParsingTest {
 		assertEquals(1, validationErrors.size)
 		assertEquals(6, mmDb.statements.size)
 	}
+
+	@Test def void testCompressedToNormalProof() {
+		val mmDb = '''
+			$c wff |- true $.
+			$v ph $.
+			wph $f wff ph $.
+			wtrue $a wff true $.
+			${
+				axiom $a |- true $.
+				${
+					theorem.1 $e |- ph $.
+					theorem $p |- ph $= theorem.1 $.
+				$}
+			$}
+			x $p |- true $= ( wtrue axiom theorem ) A BC $.
+		'''.parse
+		assertNotNull(mmDb)
+		val validationErrors = validate(mmDb)
+		assertEquals(0, validationErrors.size)
+		val cp = ((mmDb.statements.get(5) as ProofStatement).proof as CompressedProof)
+		val encodedNumberList = cp.parts.join
+		assertEquals("ABC", encodedNumberList)
+	}	
+		
 }
