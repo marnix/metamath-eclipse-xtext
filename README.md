@@ -48,6 +48,10 @@ and [Stack Overflow](https://stackoverflow.com/questions/tagged/xtext).
 
 And of course thanks to the Eclipse project for building a great IDE framework!
 
+The starting point was the very helpful Maven-Tycho-Xtext-Xtend project https://github.com/xtext/maven-xtext-example.
+
+The latest builds are always available within minutes of pushing a commit, thanks to GitHub and their free source code storage, TravisCI and their free continuous builds, and JFrog and their free Bintray/Artifactory deployment.
+
 # TODO list
 
 I'd like to extend this project in several areas: here is a somewhat structured and prioritized to-do list.
