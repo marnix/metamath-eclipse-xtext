@@ -106,6 +106,7 @@ I'd like to extend this project in several areas: here is a somewhat structured 
  - Add a refactoring to split a large .mm file using `$[` statements, just like
    https://github.com/sorear/set.mm-history does.
  - Efficient Outline view which is helpful for large files (like `set.mm`).
+   (Stop-gap: create a 'not yet implemented' empty outline tree.)
  - Create a small update site which points to the Xtext update site, instead
    of including all of Xtext in our own update site resulting in 70+MB.
  - Support multiple versions of Eclipse.
@@ -116,6 +117,7 @@ I'd like to extend this project in several areas: here is a somewhat structured 
    'compilation' setting).
  - Don't show Xtext-related labels (e.g., in the generated markers).
    Try to replace Xtext nature by a custom Metamath nature.
+ - Try to better follow the Maven conventions like using src/main/java, etc.
  - Try to get rid of Xtend, if possible.  (I prefer a pure Java approach, to make
    this project more 'hackable' for people who don't know Xtend, and don't want
    to install the Xtend IDE for developing it.)
