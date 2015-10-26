@@ -1,23 +1,21 @@
 package mm.ecxt.ui.highlight;
 
-import static mm.ecxt.ui.highlight.MMHighlightingConfiguration.COMMENT;
-import static mm.ecxt.ui.highlight.MMHighlightingConfiguration.KEYWORD;
-import static mm.ecxt.ui.highlight.MMHighlightingConfiguration.VARIABLE;
+import static mm.ecxt.ui.highlight.MMHighlightingConfiguration.*;
 
-import org.eclipse.xtext.impl.RuleCallImpl;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.impl.TerminalRuleImpl;
 import org.eclipse.xtext.nodemodel.BidiIterator;
 import org.eclipse.xtext.nodemodel.BidiTreeIterator;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.impl.HiddenLeafNode;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultSemanticHighlightingCalculator;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightedPositionAcceptor;
-import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
 
-import mm.ecxt.mmLanguage.VarDecl;
+public class MMHighlightingCalculator extends DefaultSemanticHighlightingCalculator {
 
-public class MMHighlightingCalculator implements ISemanticHighlightingCalculator {
-
+	@Override
 	public void provideHighlightingFor(XtextResource resource, IHighlightedPositionAcceptor acceptor) {
 		if (resource == null || resource.getParseResult() == null)
 			return;
@@ -28,25 +26,28 @@ public class MMHighlightingCalculator implements ISemanticHighlightingCalculator
 			INode node = it.next();
 			// for more highlighting inspiration, see
 			// http://www.mo-seph.com/projects/syntaxhighlighting
-			if (node.getSemanticElement() instanceof VarDecl) {
-				setStyles(acceptor, it, VARIABLE);
-			} else if (node instanceof HiddenLeafNode && node.getGrammarElement() instanceof TerminalRuleImpl) {
-				TerminalRuleImpl ge = (TerminalRuleImpl) node.getGrammarElement();
-				if (ge.getName().equals("COMMENT")) {
+			boolean highlighted = false;
+			if (node instanceof HiddenLeafNode && node.getGrammarElement() instanceof TerminalRule) {
+				TerminalRule tr = (TerminalRule) node.getGrammarElement();
+				if ("COMMENT".equals(tr.getName())) {
 					acceptor.addPosition(node.getOffset(), node.getLength(), COMMENT);
+					highlighted = true;
 				}
-			} else if (node.getGrammarElement() instanceof RuleCallImpl) {
-				RuleCallImpl rc = (RuleCallImpl) node.getGrammarElement();
-				if (rc.getRule() instanceof TerminalRuleImpl) {
-					TerminalRuleImpl ge = (TerminalRuleImpl) rc.getRule();
-					if (ge.getName().startsWith("DOLLAR_")) {
-						acceptor.addPosition(node.getOffset(), node.getLength(), KEYWORD);
-					}
+			} else if (node.getGrammarElement() instanceof RuleCall) {
+				RuleCall rc = (RuleCall) node.getGrammarElement();
+				if (rc.getRule() instanceof TerminalRule && rc.getRule().getName().startsWith("DOLLAR_")) {
+					acceptor.addPosition(node.getOffset(), node.getLength(), KEYWORD);
+					highlighted = true;
+					// } else {
+					// System.err.println("RULE: " + rc.getRule());
 				}
+				// } else if (node.getSemanticElement() instanceof LabeledStatement) {
+				// LabeledStatement ls = (LabeledStatement) node.getSemanticElement();
 			}
-			// else
-			// System.err.println( "Node: " + node.getClass().getSimpleName() +
-			// " " + node.getGrammarElement().getClass().getSimpleName() );
+			if (!highlighted) {
+				// System.err.println("Node not highlighted: " + node.getClass().getSimpleName() + " "
+				// + node.getGrammarElement().getClass().getSimpleName() + ": '" + node.getText() + "'");
+			}
 		}
 	}
 
