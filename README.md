@@ -70,6 +70,10 @@ I'd like to extend this project in several areas: here is a somewhat structured 
  - In non-compressed proof formats, highlight the non-syntax steps.
  - Try and render math symbols as Unicode characters, based on set.mm's `$t` info.
 
+## Basic editing
+
+ - Add a 'Toggle Comment' UI action, which replaces `$p` etc. by `@p` etc., or vice versa.
+
 ## Proof assistant
 
  - Create 'refactoring' action to reformat a proof in a 'calculational' format,
