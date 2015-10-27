@@ -73,6 +73,7 @@ I'd like to extend this project in several areas: here is a somewhat structured 
 ## Basic editing
 
  - Add a 'Toggle Comment' UI action, which replaces `$p` etc. by `@p` etc., or vice versa.
+ - Correct auto-closing of `$(` and `${` brackets.
 
 ## Proof assistant
 
