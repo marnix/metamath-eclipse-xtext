@@ -7,14 +7,14 @@ import mm.ecxt.mmLanguage.LabeledStatement;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.Region;
-import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
+import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.ui.editor.hyperlinking.HyperlinkHelper;
 import org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkAcceptor;
+import org.eclipse.xtext.ui.search.IXtextEObjectSearch;
 
 import com.google.inject.Inject;
 
@@ -24,7 +24,7 @@ public class MMHyperlinkHelper extends HyperlinkHelper {
 	private static final Pattern PATTERN_INITIAL_MATHSYMBOL = Pattern.compile("([-A-Za-z0-9_.]+).*", Pattern.DOTALL);
 
 	@Inject
-	private IScopeProvider scopeProvider;
+	private IXtextEObjectSearch search;
 
 	@Override
 	public void createHyperlinksByOffset(XtextResource resource, int offset, IHyperlinkAcceptor acceptor) {
@@ -54,15 +54,18 @@ public class MMHyperlinkHelper extends HyperlinkHelper {
 		String mathSymbol = m.group(1);
 		// we found a math symbol after the tilde
 
-		// TODO: Replace the following label search by a lookup into some kind of index
-		// I have no idea yet how to do such index creation/update for an Ecore or an Xtext-based Ecore model.
 		EObject target = null;
-		for (LabeledStatement ls : EcoreUtil2.getAllContentsOfType(resource.getParseResult().getRootASTElement(),
-				LabeledStatement.class)) {
-			if (mathSymbol.equals(ls.getName())) {
-				target = ls;
-				break;
+		for (IEObjectDescription eObjDesc : search.findMatches(mathSymbol, "")) {
+			EObject obj = eObjDesc.getEObjectOrProxy();
+			if (!mathSymbol.equals(eObjDesc.getName().toString())) {
+				// findMatches found a substring, but not the exact mathSymbol we're looking for
+				continue;
 			}
+			if (!(obj instanceof LabeledStatement)) {
+				// ~ mathSymbol referred to something, but not a statement label: skip
+				continue;
+			}
+			target = obj;
 		}
 		if (target == null) {
 			return;
