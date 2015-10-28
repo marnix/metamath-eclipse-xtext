@@ -2,6 +2,7 @@ package mm.ecxt.ui;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.resource.containers.IAllContainersState;
+import org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkHelper;
 import org.eclipse.xtext.ui.editor.model.IResourceForEditorInputFactory;
 import org.eclipse.xtext.ui.editor.model.ResourceForIEditorInputFactory;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
@@ -43,5 +44,9 @@ public class MMLanguageUiModule extends mm.ecxt.ui.AbstractMMLanguageUiModule {
 
 	public Class<? extends ISemanticHighlightingCalculator> bindISemanticHighlightingCalculator() {
 		return MMHighlightingCalculator.class;
+	}
+
+	public Class<? extends IHyperlinkHelper> bindIHyperlinkHelper() {
+		return MMHyperlinkHelper.class;
 	}
 }
