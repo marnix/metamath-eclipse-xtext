@@ -5,7 +5,7 @@
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
-       uri = "urn:marnix:mm.exct/MMLanguage" 
+       uri = "urn:marnix:mm.ecxt/MMLanguage" 
        class = "mm.ecxt.mmLanguage.MmLanguagePackage"
        genModel = "model/generated/MmLanguage.genmodel" /> 
 	
