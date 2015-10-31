@@ -1,6 +1,6 @@
 language: java
 sudo: false
-script: mvn -f mm.ecxt.parent/pom.xml install
+script: mvn install
 after_success:
  - test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && mvn -f mm.ecxt.updatesite/pom.xml deploy --settings .travis-maven-settings.xml -DskipTests=true -DaltDeploymentRepository=oss-jfrog-snapshots::default::http://oss.jfrog.org/artifactory/oss-snapshot-local
 env:

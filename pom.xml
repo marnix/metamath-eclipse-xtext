@@ -3,16 +3,17 @@
 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>mm.ecxt</groupId>
-	<artifactId>mm.exct.parent</artifactId>
+	<artifactId>mm.ecxt.parent</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
+	<name>Metamath Eclipse Plugin Parent</name>
 	<modules>
-		<module>../mm.ecxt</module>
-		<module>../mm.ecxt.target</module>
-		<module>../mm.ecxt.ui</module>
-		<module>../mm.ecxt.tests</module>
-		<module>../mm.ecxt.sdk</module>
-		<module>../mm.ecxt.updatesite</module>
+		<module>mm.ecxt</module>
+		<module>mm.ecxt.target</module>
+		<module>mm.ecxt.ui</module>
+		<module>mm.ecxt.tests</module>
+		<module>mm.ecxt.sdk</module>
+		<module>mm.ecxt.updatesite</module>
 	</modules>
 
 	<properties>

@@ -6,9 +6,8 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <relativePath>../mm.ecxt.parent/pom.xml</relativePath>
     <groupId>mm.ecxt</groupId>
-    <artifactId>mm.exct.parent</artifactId>
+    <artifactId>mm.ecxt.parent</artifactId>
     <version>1.0.0-SNAPSHOT</version>
   </parent>
 
