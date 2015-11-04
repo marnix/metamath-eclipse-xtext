@@ -1,0 +1,3 @@
+instructions.configure=\
+  org.eclipse.equinox.p2.touchpoint.eclipse.addRepository(location:http${#58}//download.eclipse.org/modeling/tmf/xtext/updates/composite/releases/,type:0,name:MM Xtext All In One ${#40}Releases${#41},enabled:false); \
+  org.eclipse.equinox.p2.touchpoint.eclipse.addRepository(location:http${#58}//download.eclipse.org/modeling/tmf/xtext/updates/composite/releases/,type:1,name:MM Xtext All In One ${#40}Releases${#41},enabled:false);
