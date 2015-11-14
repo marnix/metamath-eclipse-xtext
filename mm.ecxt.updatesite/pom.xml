@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
                       http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+	<modelVersion>4.0.0</modelVersion>
 
-  <parent>
-    <groupId>mm.ecxt</groupId>
-    <artifactId>mm.ecxt.parent</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
-  </parent>
+	<parent>
+		<groupId>mm.ecxt</groupId>
+		<artifactId>mm.ecxt.parent</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+	</parent>
 
-  <artifactId>mm.ecxt.updatesite</artifactId>
-  <packaging>eclipse-repository</packaging>
+	<artifactId>mm.ecxt.updatesite</artifactId>
+	<packaging>eclipse-repository</packaging>
 
-  <name>Metamath Eclipse Plugin Update Site</name>
+	<name>Metamath Eclipse Plugin Update Site</name>
 
 	<build>
 		<plugins>
@@ -42,8 +41,35 @@
 				<artifactId>tycho-p2-repository-plugin</artifactId>
 				<version>${tycho-version}</version>
 				<configuration>
-					<includeAllDependencies>true</includeAllDependencies>
+					<compress>false</compress>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<configuration>
+							<target xmlns:ant-contrib="antlib:net.sf.antcontrib">
+								<xslt in="${project.build.directory}/repository/content.xml"
+									out="${project.build.directory}/repository/updated-content.xml"
+									style="add-references-to-content-xml.xsl" />
+								<move
+									file="${project.build.directory}/repository/updated-content.xml"
+									tofile="${project.build.directory}/repository/content.xml" />
+								<touch file="${project.build.directory}/repository/content.xml"
+									datetime="01/01/3000 2:02:17 pm" />
+								<zip update="true"
+									destfile="${project.build.directory}/mm.ecxt.updatesite-1.0.0-SNAPSHOT.zip"
+									basedir="${project.build.directory}/repository" />
+							</target>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
