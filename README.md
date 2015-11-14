@@ -27,9 +27,9 @@ The code in this repository is licensed under the Eclipse Public License - v 1.0
 
 # Installation instructions
 
-To install, point your Eclipse to the following update site (courtesy of the OSS Artifactory repository from JFrog): `jar:https://oss.jfrog.org/artifactory/libs-snapshot/mm/ecxt/mm.ecxt.updatesite/1.0.0-SNAPSHOT/mm.ecxt.updatesite-1.0.0-SNAPSHOT.zip!/` and select the MMLanguage SDK Feature.  (Note that this update site is large, so it might take a while to download and install: it is a single 70+ MB zip-file, which also contains Xtext and all other dependencies.  This should be replaced by a very small update site which points to the Xtext update site.  I don't yet know how to best fight Tycho on this point.)
+To install, point your Eclipse to the following update site (courtesy of the OSS Artifactory repository from JFrog): `jar:https://oss.jfrog.org/artifactory/libs-snapshot/mm/ecxt/mm.ecxt.updatesite/1.0.0-SNAPSHOT/mm.ecxt.updatesite-1.0.0-SNAPSHOT.zip!/` and select the MMLanguage SDK Feature.
 
-I have only tested so far with Eclipse Mars R.
+I have mostly tested so far with Eclipse Mars R, but at least Eclipse Luna SR2 seems to work fine as well.
 
 *Note about large files.* Before you try to open `set.mm` (which is 20+MB these days), make sure you run your Eclipse with `-Xmx4G` in the proper place in your `eclipse.ini`.  And then it still might hang on you unless you have a fast system.  You also probably want to close the Outline view.
 
@@ -116,8 +116,6 @@ I'd like to extend this project in several areas: here is a somewhat structured 
    https://github.com/sorear/set.mm-history does.
  - Efficient Outline view which is helpful for large files (like `set.mm`).
    (Stop-gap: create a 'not yet implemented' empty outline tree.)
- - Create a small update site which points to the Xtext update site, instead
-   of including all of Xtext in our own update site resulting in 70+MB.
  - Support multiple versions of Eclipse.
  
 ## Clean-up
