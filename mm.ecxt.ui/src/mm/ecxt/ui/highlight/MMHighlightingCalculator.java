@@ -1,7 +1,11 @@
 package mm.ecxt.ui.highlight;
 
 import static mm.ecxt.ui.highlight.MMHighlightingConfiguration.*;
+import mm.ecxt.mmLanguage.VarDecl;
+import mm.ecxt.services.MMLanguageGrammarAccess;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.impl.TerminalRuleImpl;
@@ -9,15 +13,24 @@ import org.eclipse.xtext.nodemodel.BidiIterator;
 import org.eclipse.xtext.nodemodel.BidiTreeIterator;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.impl.HiddenLeafNode;
+import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultSemanticHighlightingCalculator;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightedPositionAcceptor;
 
+import com.google.inject.Inject;
+
 public class MMHighlightingCalculator extends DefaultSemanticHighlightingCalculator {
+
+	@Inject
+	private MMLanguageGrammarAccess ga;
+
+	@Inject
+	private EObjectAtOffsetHelper helper;
 
 	@Override
 	public void provideHighlightingFor(XtextResource resource, IHighlightedPositionAcceptor acceptor) {
-		if (resource == null || resource.getParseResult() == null)
+		if (resource == null || resource.getParseResult() == null || resource.getParseResult().getRootNode() == null)
 			return;
 
 		INode root = resource.getParseResult().getRootNode();
@@ -27,22 +40,32 @@ public class MMHighlightingCalculator extends DefaultSemanticHighlightingCalcula
 			// for more highlighting inspiration, see
 			// http://www.mo-seph.com/projects/syntaxhighlighting
 			boolean highlighted = false;
-			if (node instanceof HiddenLeafNode && node.getGrammarElement() instanceof TerminalRule) {
-				TerminalRule tr = (TerminalRule) node.getGrammarElement();
-				if ("COMMENT".equals(tr.getName())) {
-					acceptor.addPosition(node.getOffset(), node.getLength(), COMMENT);
-					highlighted = true;
-				}
+			if (node instanceof HiddenLeafNode && node.getGrammarElement() == ga.getCOMMENTRule()) {
+				acceptor.addPosition(node.getOffset(), node.getLength(), COMMENT);
+				highlighted = true;
 			} else if (node.getGrammarElement() instanceof RuleCall) {
 				RuleCall rc = (RuleCall) node.getGrammarElement();
 				if (rc.getRule() instanceof TerminalRule && rc.getRule().getName().startsWith("DOLLAR_")) {
 					acceptor.addPosition(node.getOffset(), node.getLength(), KEYWORD);
 					highlighted = true;
-					// } else {
-					// System.err.println("RULE: " + rc.getRule());
+				} else if (rc.getRule() == ga.getVariableStatementRule()) {
+					acceptor.addPosition(node.getOffset(), node.getLength(), VARIABLE);
+					highlighted = true;
 				}
-				// } else if (node.getSemanticElement() instanceof LabeledStatement) {
-				// LabeledStatement ls = (LabeledStatement) node.getSemanticElement();
+			} else if (node.getGrammarElement() instanceof CrossReference) {
+				if (node.getGrammarElement() == ga.getDvrStatementAccess().getVariablesVarDeclCrossReference_1_0()
+						|| node.getGrammarElement() == ga.getFloatingHypothesisStatementAccess()
+								.getVariableVarDeclCrossReference_3_0()
+						|| node.getGrammarElement() == ga.getEssentialHypothesisStatementAccess()
+								.getSymbolsDeclCrossReference_2_0()
+						|| node.getGrammarElement() == ga.getAxiomStatementAccess().getSymbolsDeclCrossReference_2_0()
+						|| node.getGrammarElement() == ga.getProofStatementAccess().getSymbolsDeclCrossReference_2_0()) {
+					EObject target = helper.resolveElementAt(resource, node.getOffset());
+					if (target instanceof VarDecl) {
+						acceptor.addPosition(node.getOffset(), node.getLength(), VARIABLE);
+						highlighted = true;
+					}
+				}
 			}
 			if (!highlighted) {
 				// System.err.println("Node not highlighted: " + node.getClass().getSimpleName() + " "
