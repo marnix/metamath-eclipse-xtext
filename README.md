@@ -58,7 +58,6 @@ I'd like to extend this project in several areas: here is a somewhat structured 
 
 ## Viewing correct and complete files
 
- - Add syntax highlighting/coloring for variables/constants.
  - Add syntax highlighting/coloring for `` math symbol sequence `` in comments.
  - Support `$[ ... $]` include statements, including references.
    Note that it will be very difficult to allow this in arbitrary places:
