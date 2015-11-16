@@ -32,9 +32,9 @@ $( Define "wff" (part 1) $)
     weq $a wff t = r $.
 $( Define "wff" (part 2) $)
     wim $a wff ( P -> Q ) $.
-$( State axiom a1 $)
+$( State axiom ~ a1 $)
     a1 $a |- ( t = r -> ( t = s -> r = s ) ) $.
-$( State axiom a2 $)
+$( State axiom ~ a2 $)
     a2 $a |- ( t + 0 ) = t $.
     ${
        min $e |- P $.
