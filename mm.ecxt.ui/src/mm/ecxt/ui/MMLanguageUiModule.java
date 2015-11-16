@@ -14,6 +14,7 @@ import com.google.inject.Provider;
 
 import mm.ecxt.ui.highlight.MMHighlightingCalculator;
 import mm.ecxt.ui.highlight.MMHighlightingConfiguration;
+import mm.ecxt.ui.hyperlinking.MMHyperlinkHelper;
 
 /**
  * Use this class to register components to be used within the IDE.

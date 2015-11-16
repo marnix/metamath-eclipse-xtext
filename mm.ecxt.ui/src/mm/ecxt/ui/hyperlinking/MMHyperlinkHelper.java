@@ -1,4 +1,4 @@
-package mm.ecxt.ui;
+package mm.ecxt.ui.hyperlinking;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -20,7 +20,7 @@ import com.google.inject.Inject;
 
 public class MMHyperlinkHelper extends HyperlinkHelper {
 
-	private static final Pattern PATTERN_INSIDE_TILDE_LINK = Pattern.compile("(.*\\s+\\~\\s+)[-A-Za-z0-9_.]*", Pattern.DOTALL);
+	private static final Pattern PATTERN_INSIDE_TILDE_LINK = Pattern.compile("(.*\\s+\\~\\s*)[-A-Za-z0-9_.]*", Pattern.DOTALL);
 	private static final Pattern PATTERN_INITIAL_MATHSYMBOL = Pattern.compile("([-A-Za-z0-9_.]+).*", Pattern.DOTALL);
 
 	@Inject
