@@ -41,6 +41,8 @@
 				<artifactId>tycho-p2-repository-plugin</artifactId>
 				<version>${tycho-version}</version>
 				<configuration>
+					<!-- make the repository have a content.xml, instead of content.jar, 
+						so that we can hack it in the antrun execution below -->
 					<compress>false</compress>
 				</configuration>
 			</plugin>
@@ -51,18 +53,22 @@
 					<execution>
 						<phase>package</phase>
 						<configuration>
+							<!-- update the content.xml, to add reference to the Xtext update site -->
 							<target xmlns:ant-contrib="antlib:net.sf.antcontrib">
-								<xslt in="${project.build.directory}/repository/content.xml"
-									out="${project.build.directory}/repository/updated-content.xml"
+								<!-- first some abbreviations: -->
+								<property name="TargetRepoDir" value="${project.build.directory}/repository" />
+								<property name="ContentXmlFile" value="${TargetRepoDir}/content.xml" />
+								<property name="ContentXmlTempFile" value="${TargetRepoDir}/updated-content.xml" />
+								<property name="TargetRepoZip"
+									value="${project.build.directory}/${project.build.finalName}.zip" />
+								<!-- update the content.xml file -->
+								<xslt in="${ContentXmlFile}" out="${ContentXmlTempFile}"
 									style="add-references-to-content-xml.xsl" />
-								<move
-									file="${project.build.directory}/repository/updated-content.xml"
-									tofile="${project.build.directory}/repository/content.xml" />
-								<touch file="${project.build.directory}/repository/content.xml"
-									datetime="01/01/3000 2:02:17 pm" />
-								<zip update="true"
-									destfile="${project.build.directory}/mm.ecxt.updatesite-1.0.0-SNAPSHOT.zip"
-									basedir="${project.build.directory}/repository" />
+								<move file="${ContentXmlTempFile}" tofile="${ContentXmlFile}" />
+								<!-- re-create the zip-file so that the updated content.xml file is included -->
+								<delete file="${TargetRepoZip}" />
+								<zip update="false" whenempty="fail" destfile="${TargetRepoZip}"
+									basedir="${TargetRepoDir}" />
 							</target>
 						</configuration>
 						<goals>
