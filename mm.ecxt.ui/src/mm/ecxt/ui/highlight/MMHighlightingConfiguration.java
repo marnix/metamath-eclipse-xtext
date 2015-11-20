@@ -1,6 +1,6 @@
 package mm.ecxt.ui.highlight;
 
-import static org.eclipse.swt.SWT.NORMAL;
+import static org.eclipse.swt.SWT.*;
 
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
@@ -16,8 +16,9 @@ public class MMHighlightingConfiguration implements IHighlightingConfiguration {
 
 	// configure the acceptor providing the id, the description string
 	// that will appear in the preference page and the initial text style
+	@Override
 	public void configure(IHighlightingConfigurationAcceptor acceptor) {
-		addType(acceptor, VARIABLE, 50, 0, 0, NORMAL);
+		addType(acceptor, VARIABLE, 139, 105, 20, ITALIC);
 		addType(acceptor, KEYWORD, 128, 0, 128, NORMAL);
 		addType(acceptor, COMMENT, 150, 200, 200, NORMAL);
 	}
