@@ -3,9 +3,10 @@
  */
 package mm.ecxt.scoping;
 
+import static mm.ecxt.scoping.MMHelpers.*;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
@@ -13,56 +14,19 @@ import org.eclipse.xtext.scoping.impl.FilteringScope;
 
 import com.google.common.base.Predicate;
 
-import mm.ecxt.mmLanguage.AxiomStatement;
-import mm.ecxt.mmLanguage.ConstDecl;
-import mm.ecxt.mmLanguage.MMDatabase;
-import mm.ecxt.mmLanguage.ProofStatement;
-import mm.ecxt.mmLanguage.VarDecl;
-
 /**
  * This class contains custom scoping description.
  * 
- * See
- * https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#scoping
- * on how and when to use it.
+ * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#scoping on how and when to use it.
  */
 public class MMLanguageScopeProvider extends AbstractDeclarativeScopeProvider {
-
-	private static boolean isValidReference(EObject source, EObject target) {
-		if (target.eContainer() == null) {
-			// TODO: Implement references to $[ ... $] included file
-			return false;
-		}
-		boolean targetVisibleAfterBlock = target instanceof ConstDecl || target instanceof AxiomStatement
-				|| target instanceof ProofStatement;
-		if (!targetVisibleAfterBlock) {
-			// First we make sure that the source is in the target's block
-			EObject targetBlock = target instanceof VarDecl ? target.eContainer().eContainer() : target.eContainer();
-			if (!(targetBlock instanceof MMDatabase)) {
-				// this should not occur, but for robustness we'll stop here
-				return false;
-			}
-			if (!contains(targetBlock, source)) {
-				return false;
-			}
-		}
-		return startOffsetOf(target) < startOffsetOf(source);
-	}
-
-	private static boolean contains(EObject container, EObject obj) {
-		return obj != null && (obj.equals(container) || contains(container, obj.eContainer()));
-	}
-
-	private static int startOffsetOf(EObject x) {
-		return NodeModelUtils.getNode(x).getTotalOffset();
-	}
 
 	@Override
 	public IScope getScope(final EObject context, EReference reference) {
 		Predicate<IEObjectDescription> filter = new Predicate<IEObjectDescription>() {
 			@Override
 			public boolean apply(IEObjectDescription input) {
-				return isValidReference(context, input.getEObjectOrProxy());
+				return isValidReferenceAccordingToScopingRules(context, input.getEObjectOrProxy());
 			}
 		};
 		return new FilteringScope(super.getScope(context, reference), filter);
