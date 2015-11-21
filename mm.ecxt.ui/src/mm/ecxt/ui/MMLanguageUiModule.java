@@ -1,5 +1,6 @@
 package mm.ecxt.ui;
 
+import mm.ecxt.ui.contentassist.MMAutoEditStrategyProvider;
 import mm.ecxt.ui.highlight.MMHighlightingCalculator;
 import mm.ecxt.ui.highlight.MMHighlightingConfiguration;
 import mm.ecxt.ui.hyperlinking.MMHyperlinkHelper;
@@ -9,6 +10,7 @@ import mm.ecxt.ui.tooltips.MMEObjectHoverProvider;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
 import org.eclipse.xtext.resource.containers.IAllContainersState;
+import org.eclipse.xtext.ui.editor.autoedit.AbstractEditStrategyProvider;
 import org.eclipse.xtext.ui.editor.hover.IEObjectHoverProvider;
 import org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkHelper;
 import org.eclipse.xtext.ui.editor.model.IResourceForEditorInputFactory;
@@ -61,5 +63,10 @@ public class MMLanguageUiModule extends mm.ecxt.ui.AbstractMMLanguageUiModule {
 
 	public Class<? extends IEObjectDocumentationProvider> bindIEObjectDocumentationProviderr() {
 		return MMEObjectDocumentationProvider.class;
+	}
+
+	@Override
+	public Class<? extends AbstractEditStrategyProvider> bindAbstractEditStrategyProvider() {
+		return MMAutoEditStrategyProvider.class;
 	}
 }
