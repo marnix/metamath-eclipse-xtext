@@ -41,6 +41,7 @@ Support and useful notes came from
 [Ray Wu's blog posts on Xtext](http://rayjcwu.logdown.com/tags/xtext),
 Dave Murray-Rust's blog post [Creating a Syntax Highlighting, Outlining editor with Eclipse and XText](http://www.mo-seph.com/projects/syntaxhighlighting),
 [Sebastian Zarnekow's blog posts on Xtext](https://zarnekow.blogspot.com/search/label/Xtext),
+[Christian Dietrich's blog posts on Xtext](https://christiandietrich.wordpress.com/category/xtext/),
 [the Xtext community forum](https://www.eclipse.org/forums/index.php/f/27/),
 and [Stack Overflow](https://stackoverflow.com/questions/tagged/xtext).
 
