@@ -64,7 +64,7 @@ I'd like to extend this project in several areas: here is a somewhat structured 
    Question: How to treat a file that is imported in two otherwise related .mm files,
    possibly in a different 'context'?
  - When showing a tooltip for a label, show the (formatted-as-on-website) comment
-   that precedes that label (for $a/$p/$e/$f) or that follows the declaration (for $c/$v).
+   that precedes that label (for $a/$p/$e/$f) or that follows the declaration on the same line (for $c/$v).
  - In non-compressed proof formats, highlight the non-syntax steps.
  - Try and render math symbols as Unicode characters, based on set.mm's `$t` info.
 
